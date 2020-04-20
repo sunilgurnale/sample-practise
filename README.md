@@ -8,3 +8,7 @@ fourth iteration from docker branch
 
 fifth iteration from master
 fith iter fromm Docker
+
+Rebase
+---------/
+1st rebase from master

@@ -6,3 +6,8 @@ perauth.log  from master
 mail.log   from master
 debug.log from Docker
 postfix.log from Docker
+
+Rebase
+-----------
+login.log  from master
+logout.log from master
