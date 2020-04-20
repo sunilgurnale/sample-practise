@@ -4,3 +4,5 @@ rad.log
 
 perauth.log  from master
 mail.log   from master
+debug.log from Docker
+postfix.log from Docker
