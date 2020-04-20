@@ -11,3 +11,6 @@ Rebase
 -----------
 login.log  from master
 logout.log from master
+----------
+mysql.log from docker
+webapp.log from docker`
