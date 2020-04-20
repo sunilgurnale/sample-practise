@@ -1,2 +1,6 @@
 auth.log
 rad.log
+
+
+debug.log from Docker
+postfix.log from Docker
