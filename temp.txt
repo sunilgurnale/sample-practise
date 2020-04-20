@@ -1,2 +1,6 @@
 auth.log
 rad.log
+
+
+perauth.log  from master
+mail.log   from master
