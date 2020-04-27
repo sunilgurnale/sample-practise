@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 first iteration
 
 second iteration from master
@@ -16,3 +17,7 @@ Rebase
 Rebase
 ------------------
 Changes from Docker branch 1st
+=======
+# sample-practise
+Self Practise
+>>>>>>> 8e2651849305f3b4f39ae7d6ec8242c95ffd1a86
