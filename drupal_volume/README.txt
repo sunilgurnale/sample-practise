@@ -1,5 +1,8 @@
-Observer: Volumes
+docker-compose down -v : to remove the volumes as well
+docker-compose down --help
 
+
+Observer: Volumes
 
 This example shows a named volume (mydata) being used by the web service, and a bind mount defined for a single service (first path under db service volumes). The db service also uses a named volume called dbdata (second path under db service volumes), but defines it using the old string format for mounting a named volume. Named volumes must be listed under the top-level volumes key, as shown.
 
