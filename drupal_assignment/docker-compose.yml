@@ -2,7 +2,9 @@ version: "3"
 services:
   drupal:
    image: drupal-custom
-   build: . 
+   build: 
+    context: ../  #current dir location
+    dockerfile: ru_dcf/Dockerfile #from current dir location, step down 1 dir and then enter ru_dcf dir to get Dockerfile
    ports:
     - '8080:80'
    volumes:
