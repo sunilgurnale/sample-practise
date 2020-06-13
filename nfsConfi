@@ -1,0 +1,46 @@
+Install pkg in both systems server/client
+	yum install nfs-utils nfs-utils-lib
+
+
+PORTS: 
+Add only if nothing is working in both systems.
+2049, 111, nfs(service)
+
+
+SERVER:
+	systemctl enable nfs
+	systemctl start nfs
+
+	[root@nfsserver ~]# mkdir /nfsshare
+	[root@nfsserver ~]# vi /etc/exports
+
+		/nfsshare 192.168.0.101(rw,sync,no_root_squash)
+		TAB is used as SPACE in above syntax
+
+	exportfs -avr
+	systemctl restart nfs
+
+
+
+CLIENT:
+
+	ping 192.168.0.100
+	systemctl enable nfs
+	systemctl start nfs
+
+	[root@nfsclient ~]# showmount -e 192.168.0.100
+
+	Export list for 192.168.0.100:
+	/nfsshare 192.168.0.101
+
+	[root@nfsclient ~]# mount -t nfs 192.168.0.100:/nfsshare /mnt/nfsshare
+	OR
+	[root@nfsclient ~]# vi /etc/fstab
+		192.168.0.100:/nfsshare /mnt  nfs defaults 0 0
+
+
+
+TROUBLESHOOT:
+	rpcinfo -p 192.168.0.100
+	df -Th
+	[root@nfsclient ~]# df -h -F nfs
