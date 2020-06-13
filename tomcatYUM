@@ -1,0 +1,26 @@
+INSTALL:
+yum install tomcat wget -y
+
+ENABLE AND START:
+systemctl enable tomcat
+systemctl start tomcat
+
+
+/etc/tomcat
+/var/log/tomcat
+/var/log/tomcat 
+
+
+LOCATION:
+cd /usr/share/tomcat/
+
+DOCUMENT ROOT:
+cd /usr/share/tomcat/webapps/
+
+
+CONFIG FILE
+cd /usr/share/tomcat/conf/server.xml
+
+systemctl restart tomcat
+
+LOCATIONS MAY VARY BASED ON OS, CHECK STATUS OF SERVCIE TO GET THE FILE LOCATION

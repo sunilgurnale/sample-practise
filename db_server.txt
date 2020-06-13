@@ -1,0 +1,100 @@
+IPM URL
+https://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html
+
+yum install mariadb mariadb-server firewalld openssh-clients -y      ---for openssh-clients:scp
+systemctl enable mariadb
+systemctl enable firewalld
+systemctl start mariadb
+systemctl start firewalld
+
+hostname -I  -- to get mysql server ip
+172.16.239.10
+
+mysql_secure_installation 
+Y
+Password for root
+Y
+Y
+
+
+mysql -u root -p
+
+create database student;
+
+mysql -u root -p student < db.sql 				--restore backup to student db from db.sql
+
+
+
+CREATE USER 'sunil'@'localhost' IDENTIFIED BY 'password';   	--Flush required after all grant to apply changes 
+OR
+CREATE USER 'sunil'@'%' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON student.* TO 'sunil'@'localhost';
+OR
+GRANT ALL PRIVILEGES ON student.* TO 'sunil'@'%';
+
+
+
+REVOKE type_of_permission ON database_name.table_name FROM ‘username’@‘localhost’;
+DROP USER ‘username’@‘localhost’;
+
+
+
+**Flush privileges; 								--to appply changes
+
+use mysql 
+select user,host,password from user;						--to check created and already present user
+
+show grants for 'sunil'@'localhost';
+OR
+show grants for 'sunil'@'%';
+
+vi /etc/my.cnf
+	[mysqld]
+	..
+	..
+	port:3306								---on mysql server ss -tunlp | grep -i "mysql" ------to get port number on which it is listening
+	bind-address=172.16.239.10  						---mysql-server ip
+	skip-networking=0							--imp skip-networking : Do not listen for TCP/IP connections at all. All interaction with mysqld must be made via 										 Unix sockets. This option is highly recommended for systems where only local requests are allowed. Since you need 										  to allow remote connection this line should be removed from my.cnf or put it in comment state.
+	#skip-bind-address							--not necessary
+	:wq
+
+systemctl restart mysql
+
+firewall-cmd --add-service=mysql --permanent
+firewall-cmd --add-port=3306/tcp --permanent
+firewall-cmd --reload
+
+on local host machine
+ssh tony@172.16.238.10
+sudo -i
+install mariadb
+telnet 172.16.239.10 3306
+--return success
+
+mysql -u sunil -h 172.16.239.10 -p 					--mysql server ip
+pass
+you should get access
+
+
+************************************************************************************************
+Please turn on 
+define( 'WP_DEBUG' , false);to define( 'WP_DEBUG' , true);
+in the file /data/wp-config.php on NFS server.
+
+WordPress: https://wordpress.org/support/article/editing-wp-config-php/
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'student' );
+
+/** MySQL database username */
+define( 'DB_USER', 'sunil' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'password' );
+
+/** MySQL hostname */
+define( 'DB_HOST', '172.16.239.10:3306' );   				--DBserver IP/name, localhost:3306, mysql.example.com:3306
+
+

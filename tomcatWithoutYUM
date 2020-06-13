@@ -1,0 +1,51 @@
+https://www.tecmint.com/install-apache-tomcat-in-centos/
+
+REQUIRED: 
+# yum install java-1.8.0-openjdk-devel  	#install JDK 8
+OR
+# yum install java-11-openjdk-devel		#install JDK 11
+
+
+# java -version
+openjdk version "11.0.4" 2019-07-16 LTS
+OpenJDK Runtime Environment 18.9 (build 11.0.4+11-LTS)
+OpenJDK 64-Bit Server VM 18.9 (build 11.0.4+11-LTS, mixed mode, sharing)
+
+DOWNLOAD using WGET: hhttps://tomcat.apache.org/download-90.cgi
+
+# cd /usr/local			--directory which is a folder owned by the root user only
+# wget http://apachemirror.wuchna.com/tomcat/tomcat-9/v9.0.26/bin/apache-tomcat-9.0.26.tar.gz
+# tar -xvf apache-tomcat-9.0.26.tar.gz
+# mv apache-tomcat-9.0.26 tomcat9
+
+CATALINA_HOME environment variable:
+
+# echo "export CATALINA_HOME="/usr/local/tomcat9"" >> ~/.bashrc
+# source ~/.bashrc
+# cd /usr/local/tomcat9/bin
+# ./startup.sh 			--START tomcat
+curl http://localhost:8080	--TEST
+
+
+BY DEFAULT IT RUNS IN PORT 8080
+CONFIG FILE PATH: 
+IMP: STOP THE TOMCAT 1st and then MAKE CHANGES THEN START AGAIN
+# vi /usr/local/tomcat9/conf/server.xml
+REPLACE ALL 8080 with YOUR REQUIRED PORT NUMBER
+
+
+DOCUMENT ROOT:
+cd /usr/local/tomcat9/webapps/
+EXTRACT .war FILES
+unzip ROOT.war
+jar xvf ROOT.war
+
+
+
+START AND STOP SERVICE:
+# /usr/local/tomcat9/bin/startup.sh
+# /usr/local/tomcat9/bin/shutdown.sh
+
+
+VERSION INFO:
+/usr/local/tomcat9/bin/version.sh
