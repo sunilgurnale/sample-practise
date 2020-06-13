@@ -1,0 +1,33 @@
+The git reset command is a complex and versatile tool for undoing changes. 
+It has three primary forms of invocation. 
+These forms correspond to command line arguments --soft, --mixed, --hard. 
+The three arguments each correspond to Git's three internal state management mechanism's, 
+
+
+The Commit Tree (HEAD), The Staging Index, and The Working Directory.
+
+
+
+To accurately view the state of the Staging Index we must utilize a lesser known Git command git ls-files. 
+The "git ls-files" command is essentially a debug utility for inspecting the state of the Staging Index tree.
+
+Here we have executed "git ls-files" with the "-s" or "--stage" option. 
+Without the -s option the git ls-files output is simply a list of file names and paths that are currently part of the index. 
+The -s option displays additional metadata for the files in the Staging Index. 
+This metadata is the staged contents' mode bits, object name, and stage number. 
+
+HEAD is a reference to the most recent commit in current branch (in  most cases). When HEAD doesn't point to most recent commit, you go into detached HEAD state
+	git show HEAD   OR   git show <commitID>
+	git diff HEAD~2 HEAD~1 -- always put older commit 1st to get the difference (git difftool--tool)
+	HEAD, HEAD~1, HEAD~2 .....(git log top to bottom)	
+
+	git checkout <commitID> -- changes HEAD to point to the pointed/refered commit <commitID>
+	git checkout master
+	git checkout --  >undo's changes not commited, and are staged
+
+
+git checkout <commitID> --> changes the head pointer to the commit ID (git log)--> detached HEAD state
+
+
+
+git reset HEAD file.txt 

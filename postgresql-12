@@ -1,0 +1,53 @@
+INSTALLATION_URL: https://www.postgresql.org/download/linux/redhat/
+	12,CentOS7,x86_64
+	# Install the repository RPM:
+	yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+
+	# Install PostgreSQL:
+	yum install postgresql12-server
+
+	# Optionally initialize the database and enable automatic start:
+	/usr/pgsql-12/bin/postgresql-12-setup initdb
+	systemctl enable postgresql-12
+	systemctl start postgresql-12
+
+SYSTEM_INFO:
+	cat /etc/os-release , lsb-release
+	cat /proc/cpuinfo
+	uname -a
+
+STEPS:
+	su - postgres
+	-bash-4.2$  psql
+	psql# CREATE USER kodekloud_aim WITH ENCRYPTED PASSWORD ‘TmPcZjtRQx’;
+	psql# CREATE DATABASE kodekloud_db9 OWNER kodekloud_aim;
+	psql# GRANT ALL PRIVILEGES ON DATABASE kodekloud_db9 TO kodekloud_aim;
+	vi /var/lib/pgsql/data/pg_hba.conf
+		local	all	all	md5
+	systemctl restart postgresql-12
+	systemctl status postgresql-12
+	
+	psql -U kodekloud_aim -d kodekloud_db2
+	TmPcZjtRQx	--Password
+
+	
+
+STUDY_QUERY_URL:https://www3.ntu.edu.sg/home/ehchua/programming/sql/PostgreSQL_GetStarted.html
+
+EXTRA_URL : https://stackoverflow.com/questions/17429040/creating-user-with-encrypted-password-in-postgresql
+
+EXTRA:
+	echo -n "" | md5sum
+	edit pg_hba.conf to use md5 and change all to kodekloud_db9
+	edit postgresql.conf to permit listen = localhost
+
+
+try to connect psql using root does not work
+    psql -U root -h localhost -d kodekloud_db9 -W 
+Failed 
+
+Connect using kodekloud_aim 
+    psql -U kodekloud_aim -d kodekloud_db9 -h 127.0.0.1 -W
+
+Works OK
+
