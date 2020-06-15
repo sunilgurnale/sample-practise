@@ -5,6 +5,7 @@ yum install mariadb mariadb-server firewalld openssh-clients -y      ---for open
 systemctl enable mariadb
 systemctl enable firewalld
 systemctl start mariadb
+systemctl status mariadb -l 		--troubleshoot
 systemctl start firewalld
 
 hostname -I  -- to get mysql server ip
@@ -53,7 +54,7 @@ vi /etc/my.cnf
 	[mysqld]
 	..
 	..
-	port:3306								---on mysql server ss -tunlp | grep -i "mysql" ------to get port number on which it is listening
+	port=3306								---on mysql server ss -tunlp | grep -i "mysql" ------to get port number on which it is listening
 	bind-address=172.16.239.10  						---mysql-server ip
 	skip-networking=0							--imp skip-networking : Do not listen for TCP/IP connections at all. All interaction with mysqld must be made via 										 Unix sockets. This option is highly recommended for systems where only local requests are allowed. Since you need 										  to allow remote connection this line should be removed from my.cnf or put it in comment state.
 	#skip-bind-address							--not necessary
