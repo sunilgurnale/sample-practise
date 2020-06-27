@@ -1,6 +1,9 @@
 URL:https://www.cyberciti.biz/faq/how-to-install-and-use-nginx-on-centos-7-rhel-7/
 
 INSTALLATION:
+yum install epel-release
+yum install check-update
+yum install nginx
 CENTOS 7 (cat /etc/os-release)
 vi /etc/yum.repos.d/nginx.repo 
 [nginx]
