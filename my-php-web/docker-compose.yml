@@ -1,0 +1,15 @@
+nginx:
+    build: .
+    ports:
+        - "8000:80"
+        - "443:443"
+    volumes:
+        - ./:/var/www/test/
+    links:
+        - fpm
+fpm:
+    image: php:7.2-fpm
+    ports:
+        - "9000:9000"
+    volumes:
+        - ./:/var/www/test/
